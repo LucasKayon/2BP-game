@@ -395,15 +395,15 @@ MonoBehaviour:
   - 0
   - 2
   obstacleHeight:
-  - -7
-  - 9
+  - -9
+  - 14
   - -7
   - 2
   - 9
   - 2
-  - -7
+  - -9
   - 9
-  - -7
+  - -9
   - 9
 --- !u!4 &843662248
 Transform:
@@ -982,6 +982,7 @@ MonoBehaviour:
     m_Bits: 128
   attackRange: 3.85
   attackDamage: 1
+  attackRate: 4
 --- !u!95 &1822073610
 Animator:
   serializedVersion: 5

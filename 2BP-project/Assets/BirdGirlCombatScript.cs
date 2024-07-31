@@ -11,12 +11,19 @@ public class BirdGirlCombatScript : MonoBehaviour
     public float attackRange;
     public int attackDamage = 1;
 
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Time.time >= nextAttackTime)
         {
-            Attack();
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
 
     }
@@ -30,7 +37,7 @@ public class BirdGirlCombatScript : MonoBehaviour
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackBox.position, attackRange, enemyLayers);
 
         // Damage the enemies
-        foreach(Collider2D enemy in hitEnemies)
+        foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("TESTE");
             enemy.GetComponent<EnemyT1Script>().TakeDamage(attackDamage);
