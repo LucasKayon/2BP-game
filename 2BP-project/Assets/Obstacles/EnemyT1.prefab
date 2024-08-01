@@ -100,10 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f286c9fcce1b624aaf2637763a1c682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 8483171957872165025}
   moveSpeed: 20
   deadZone: -45
   logic: {fileID: 0}
   maxHealth: 1
+  deathAnimationFrames: 0.15
 --- !u!58 &5877601424550782100
 CircleCollider2D:
   m_ObjectHideFlags: 0

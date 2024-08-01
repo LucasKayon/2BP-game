@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class EnemyT1Script : MonoBehaviour
 {
+    public Animator animator;
+
     public float moveSpeed;
     public float deadZone = -45;
     public LogicScript logic;
     bool triggered = false;
     public int maxHealth = 1;
     int currentHealth;
+    public float deathAnimationFrames;
 
     // Start is called before the first frame update
     void Start()
@@ -30,11 +33,6 @@ public class EnemyT1Script : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (transform.position.x < deadZone)
-        {
-            //Debug.Log("Bottom Obstable Deleted");
-            Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,7 +64,13 @@ public class EnemyT1Script : MonoBehaviour
     {
         Debug.Log("Enemy died");
 
-        Destroy(gameObject);
+        animator.SetBool("IsDead", true);
+
+        GetComponent<Collider2D>().enabled = false;        
+        this.enabled = false;
+
+        Destroy(gameObject, deathAnimationFrames);
+
     }
 }
 
