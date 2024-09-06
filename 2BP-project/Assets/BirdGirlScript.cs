@@ -25,7 +25,7 @@ public class BirdGirlScript : MonoBehaviour
     float timeUntilAttack;
     int currentEnergy;
     public LogicScript logic;
-    public int maxEnergy = 2;
+    public int maxEnergy = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -78,7 +78,14 @@ public class BirdGirlScript : MonoBehaviour
                 { 
                     
                     OnLandEvent.Invoke();
-                    logic.setEnergyValue(2);
+                    if(logic.energy <= 0)
+                    {
+                        logic.setEnergyValue(1);
+                    }
+                    
+                    
+
+                    
                 }
                     
             }

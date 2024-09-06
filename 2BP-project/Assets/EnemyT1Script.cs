@@ -12,6 +12,9 @@ public class EnemyT1Script : MonoBehaviour
     bool triggered = false;
     public int maxHealth = 1;
     int currentHealth;
+    float scoreIncrease = 100;
+    float scoreMultiplier = 1;
+    float scorePenalty = -50;
     public float deathAnimationFrames;
 
     // Start is called before the first frame update
@@ -40,8 +43,7 @@ public class EnemyT1Script : MonoBehaviour
         //Confere se o layer de colisão é o do jogador e se o obstaculo já foi ativado.
         if (collision.gameObject.layer == 3 && triggered == false)
         {
-
-            logic.detractHp(1);
+            EnemyAttack();
             triggered = true;
         }
 
@@ -55,6 +57,8 @@ public class EnemyT1Script : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            logic.increaseEnergy(1);
+            logic.increaseScore(scoreIncrease,scoreMultiplier);
             Die();
         }
 
@@ -71,6 +75,16 @@ public class EnemyT1Script : MonoBehaviour
 
         Destroy(gameObject, deathAnimationFrames);
 
+    }
+
+    public void EnemyAttack()
+    {
+        logic.detractHp(1);
+        logic.increaseScore(scorePenalty, 1);
+        if (logic.score <= 0)
+        {
+            logic.setScore(0);
+        }
     }
 }
 

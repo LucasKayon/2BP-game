@@ -9,6 +9,8 @@ public class BirdGirlCombatScript : MonoBehaviour
     public Transform attackBox;
     public LayerMask enemyLayers;
     public float attackRange;
+    public float attackHeight;
+    public float attackDistance;
     public int attackDamage = 1;
 
     public float attackRate = 2f;
@@ -33,8 +35,14 @@ public class BirdGirlCombatScript : MonoBehaviour
         // Play an attack animation
         animator.SetTrigger("BirdGirlAttack");
 
-        // Detect enemies in range of attack
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackBox.position, attackRange, enemyLayers);
+        // Define an offset for the attackBox position
+        Vector2 offset = new Vector2(attackDistance, attackHeight);
+
+        // Adjust the attackBox position with the offset
+        Vector2 adjustedAttackPosition = (Vector2)attackBox.position + offset;
+
+        // Detect enemies in range of the adjusted attack position
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(adjustedAttackPosition, attackRange, enemyLayers);
 
         // Damage the enemies
         foreach (Collider2D enemy in hitEnemies)
@@ -49,6 +57,14 @@ public class BirdGirlCombatScript : MonoBehaviour
         if (attackBox == null)
             return;
 
-        Gizmos.DrawSphere(attackBox.position, attackRange);
+        Gizmos.color = new Color(1, 0, 0, 0.5f); // Red color with 50% transparency
+
+        // Use the same offset as in the Attack method to ensure the Gizmo reflects the actual collider position
+        Vector3 offset = new Vector3(attackDistance, attackHeight, 0f);
+
+        // Calculate the adjusted position for the Gizmo
+        Vector3 adjustedPosition = attackBox.position + offset;
+
+        Gizmos.DrawWireSphere(adjustedPosition, attackRange);
     }
 }
