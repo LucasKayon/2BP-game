@@ -38,9 +38,9 @@ public class BirdGirlScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-
-        if (Input.GetKeyDown(KeyCode.Z) == true && logic.energy >=1)
+        if (Input.GetKeyDown(KeyCode.Z) == true && logic.energy >= 1 || Input.GetMouseButton(0) && touchPos.x<0 && logic.energy >=1 )
         {
             logic.decreaseEnergy(1);
             myRigidBody.velocity = Vector2.up * flapIntensity;            

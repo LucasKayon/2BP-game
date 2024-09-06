@@ -21,7 +21,9 @@ public class BirdGirlCombatScript : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButton(0) && touchPos.x > 0)
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
