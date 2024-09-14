@@ -8,6 +8,7 @@ public class ObstacleSpawner01Script : MonoBehaviour
     public GameObject bottomObstacle;
     public GameObject topObstacle;
     public GameObject enemyT1;
+    public GameObject clearScreen;
     public float[] spawnTimes; // Pre-determined spawn times
     public float[] obstacleType; // Pre-determined spawn type
     public float[] obstacleHeight; // Pre-determined spawn height
@@ -42,6 +43,10 @@ public class ObstacleSpawner01Script : MonoBehaviour
             if (obstacleType[spawnIndex] == 2)
             {
                 Spawn(enemyT1, obstacleHeight[spawnIndex]);
+            }
+            if (obstacleType[spawnIndex] == 10)
+            {
+                Spawn(clearScreen, obstacleHeight[spawnIndex]);
             }
 
             spawnIndex++; // Move to the next spawn time

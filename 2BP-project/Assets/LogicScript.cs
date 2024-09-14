@@ -12,6 +12,8 @@ public class LogicScript : MonoBehaviour
     public Text hpIndicator;
     public Text energyIndicator;
     public Text scoreIndicator;
+    public GameOverScreen GameOverScreen;
+    public ClearStageScript clearStage;
 
     void Start()
     {
@@ -67,11 +69,22 @@ public class LogicScript : MonoBehaviour
         scoreIndicator.text = $"SCORE: {score}";
     }
 
+    public void stageClear()
+    {
+        if (hp >= 1)
+        { 
+            clearStage.Setup(score);
+        }
+            
+    }
+
     void Update()
     {
         if (hp <= 0)
         {
-            SceneManager.LoadScene("Menu");
+            //SceneManager.LoadScene("Menu");
+            setScore(0);
+            GameOverScreen.Setup();
         }
     }
 }
