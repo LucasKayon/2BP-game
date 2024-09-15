@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BirdGirlCombatScript : MonoBehaviour
 {
+    public LogicScript logic;
     public Animator animator;
     public Transform attackBox;
     public LayerMask enemyLayers;
@@ -12,9 +13,16 @@ public class BirdGirlCombatScript : MonoBehaviour
     public float attackHeight;
     public float attackDistance;
     public int attackDamage = 1;
+    public float attackHitStun = 0.1f;
 
     public float attackRate = 2f;
     float nextAttackTime = 0f;
+
+
+    private void Start()
+    {
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -23,7 +31,7 @@ public class BirdGirlCombatScript : MonoBehaviour
         {
             Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (Input.GetKeyDown(KeyCode.X) || Input.GetMouseButton(0) && touchPos.x > 0)
+            if (Input.GetKeyDown(KeyCode.X) && logic.waiting == false || Input.GetMouseButton(0) && touchPos.x > 0 && logic.waiting == false)
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
@@ -51,6 +59,7 @@ public class BirdGirlCombatScript : MonoBehaviour
         {
             Debug.Log("TESTE");
             enemy.GetComponent<EnemyT1Script>().TakeDamage(attackDamage);
+            logic.TimeStop(attackHitStun);
         }
     }
 

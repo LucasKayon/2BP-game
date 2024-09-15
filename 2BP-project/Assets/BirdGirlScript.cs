@@ -26,6 +26,8 @@ public class BirdGirlScript : MonoBehaviour
     int currentEnergy;
     public LogicScript logic;
     public int maxEnergy = 5;
+    public float scorePenalty = -50;
+    public float hitStun = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +42,7 @@ public class BirdGirlScript : MonoBehaviour
     {
         Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetKeyDown(KeyCode.Z) == true && logic.energy >= 1 || Input.GetMouseButton(0) && touchPos.x<0 && logic.energy >=1 )
+        if (Input.GetKeyDown(KeyCode.Z) == true && logic.energy >= 1 && logic.waiting == false || Input.GetMouseButton(0) && touchPos.x<0 && logic.energy >=1 && logic.waiting == false)
         {
             logic.decreaseEnergy(1);
             myRigidBody.velocity = Vector2.up * flapIntensity;            
@@ -49,6 +51,24 @@ public class BirdGirlScript : MonoBehaviour
         }
 
         
+    }
+
+    public void TakeDamage()
+    {
+        logic.detractHp(1);
+        logic.increaseScore(scorePenalty, 1);
+        if (logic.score <= 0)
+        {
+            logic.setScore(0);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        animator.SetTrigger("BirdGirlDamage");
+        TakeDamage();
+        logic.TimeStop(hitStun);
+
     }
 
     private void Awake()

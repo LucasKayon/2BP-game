@@ -14,6 +14,7 @@ public class LogicScript : MonoBehaviour
     public Text scoreIndicator;
     public GameOverScreen GameOverScreen;
     public ClearStageScript clearStage;
+    public bool waiting;
 
     void Start()
     {
@@ -76,6 +77,25 @@ public class LogicScript : MonoBehaviour
             clearStage.Setup(score);
         }
             
+    }
+
+    public void TimeStop(float duration)
+    {
+        if(waiting)
+        { 
+            return; 
+        }
+
+        Time.timeScale = 0.0f;
+        StartCoroutine(Wait(duration));
+    }
+
+    IEnumerator Wait(float duration)
+    {
+        waiting = true;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1.0f;
+        waiting = false;
     }
 
     void Update()

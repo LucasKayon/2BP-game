@@ -9,7 +9,7 @@ public class EnemyT1Script : MonoBehaviour
     public float moveSpeed;
     public float deadZone = -45;
     public LogicScript logic;
-    bool triggered = false;
+    //bool triggered = false;
     public int maxHealth = 1;
     int currentHealth;
     float scoreIncrease = 100;
@@ -38,16 +38,16 @@ public class EnemyT1Script : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //Confere se o layer de colisão é o do jogador e se o obstaculo já foi ativado.
-        if (collision.gameObject.layer == 3 && triggered == false)
-        {
-            EnemyAttack();
-            triggered = true;
-        }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    //Confere se o layer de colisão é o do jogador e se o obstaculo já foi ativado.
+    //    if (collision.gameObject.layer == 3 && triggered == false)
+    //    {
+    //        EnemyAttack();
+    //        triggered = true;
+    //    }
 
-    }
+    //}
 
     public void TakeDamage(int damage)
     {
