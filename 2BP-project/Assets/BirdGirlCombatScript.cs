@@ -18,7 +18,6 @@ public class BirdGirlCombatScript : MonoBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
-
     private void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
@@ -31,13 +30,20 @@ public class BirdGirlCombatScript : MonoBehaviour
         {
             Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (Input.GetKeyDown(KeyCode.X) && logic.waiting == false || Input.GetMouseButton(0) && touchPos.x > 0 && logic.waiting == false)
+            // Keyboard input check
+            if (Input.GetKeyDown(KeyCode.X) && !logic.waiting)
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+
+            // Mouse input check
+            if (Input.GetMouseButtonDown(0) && touchPos.x > 0 && !logic.waiting)
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-
     }
 
     void Attack()

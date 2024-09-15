@@ -20,15 +20,15 @@ public class BottomObstacleHitBox : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //Confere se o layer de colisão é o do jogador e se o obstaculo já foi ativado.
-        if (collision.gameObject.layer == 3 && triggered == false)
-        {
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    //Confere se o layer de colisão é o do jogador e se o obstaculo já foi ativado.
+    //    if (collision.gameObject.layer == 3 && triggered == false)
+    //    {
 
-            logic.detractHp(1);
-            triggered = true;   
-        }
+    //        logic.detractHp(1);
+    //        triggered = true;   
+    //    }
         
-    }
+    //}
 }
