@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6070299}
   - component: {fileID: 6070298}
+  - component: {fileID: 6070300}
   m_Layer: 0
   m_Name: Logic Manager
   m_TagString: Logic
@@ -175,6 +176,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6070300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6c94667349e974c8a19c841a254767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &66601907
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &232182876
 RectTransform:
   m_ObjectHideFlags: 0
@@ -453,14 +466,14 @@ MonoBehaviour:
   - 1
   - 2
   - 1
-  - 1
-  - 2
-  - 1
   - 2
   - 2
   - 1
+  - 2
+  - 2
   - 1
   - 1
+  - 2
   - 1
   - 2
   - 1
@@ -493,7 +506,7 @@ MonoBehaviour:
   - -5
   - 1
   - -5
-  - 5
+  - 7
   - -5
   - 10
   - -5
@@ -1039,7 +1052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: -322}
+  m_AnchoredPosition: {x: -159.7, y: -322}
   m_SizeDelta: {x: 211.2756, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &561998538
@@ -2528,7 +2541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 467, y: -386}
+  m_AnchoredPosition: {x: 83, y: -385.91}
   m_SizeDelta: {x: 696.8805, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1550744927
@@ -2639,7 +2652,7 @@ MonoBehaviour:
   attackHeight: -1.65
   attackDistance: 0.75
   attackDamage: 1
-  attackHitStun: 0.05
+  attackHitStun: 0
   attackRate: 4
 --- !u!114 &1602632943
 MonoBehaviour:
@@ -2667,8 +2680,8 @@ MonoBehaviour:
   logic: {fileID: 0}
   maxEnergy: 5
   scorePenalty: -50
-  hitStun: 0.1
-  invincibilityDuration: 2
+  hitStun: 0
+  invincibilityDuration: 0.5
 --- !u!58 &1602632944
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3511,7 +3524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14509805, g: 0.16078432, b: 0.3019608, a: 0.9411765}
+  m_Color: {r: 0.14509805, g: 0.16078432, b: 0.3019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

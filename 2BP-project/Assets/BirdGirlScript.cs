@@ -25,37 +25,58 @@ public class BirdGirlScript : MonoBehaviour
     public float scorePenalty = -50;
     public float hitStun = 1;
 
-    private bool isInvincible = false; // Track invincibility state
-    public float invincibilityDuration = 2f; // Duration of invincibility in seconds
+    private bool isInvincible = false;
+    public float invincibilityDuration = 2f;
 
-    // Start is called before the first frame update
+    private bool stopGroundCheck = false;
+
     void Start()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-
         currentEnergy = maxEnergy;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        // Keyboard input check
-        if (Input.GetKeyDown(KeyCode.Z) && logic.energy >= 1 && !logic.waiting)
+        if(logic.hp > 0)
         {
-            logic.decreaseEnergy(1);
-            myRigidBody.velocity = Vector2.up * flapIntensity;
-            animator.Play("Bird_Girl_Fly");
-        }
+            // Verifica se há toques na tela
+            if (Input.touchCount > 0)
+            {
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    Touch touch = Input.GetTouch(i);
+                    Vector3 touchPosition = touch.position;
 
-        // Mouse input check
-        if (Input.GetMouseButtonDown(0) && touchPos.x < 0 && logic.energy >= 1 && !logic.waiting)
-        {
-            logic.decreaseEnergy(1);
-            myRigidBody.velocity = Vector2.up * flapIntensity;
-            animator.Play("Bird_Girl_Fly");
+                    // Apenas registra a ação quando o toque começa (fase de "Began")
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        // Verifica se o toque está no lado esquerdo da tela para pular
+                        if (touchPosition.x < Screen.width / 2 && logic.energy >= 1 && !logic.waiting)
+                        {
+                            HandleJump();
+                        }
+                    }
+                }
+            }
+
+            // Verificação para o input do teclado (Z para pular)
+            if (Input.GetKeyDown(KeyCode.Z) && logic.energy >= 1 && !logic.waiting)
+            {
+                HandleJump();
+            }
         }
+        
+    }
+
+    private void HandleJump()
+    {
+        logic.decreaseEnergy(1);
+        myRigidBody.velocity = Vector2.up * flapIntensity;
+        animator.Play("Bird_Girl_Fly");
+
+        // Para a checagem de solo por 0.5 segundos após pular
+        StartCoroutine(StopGroundCheckForTime(0.5f));
     }
 
     public void TakeDamage()
@@ -75,27 +96,29 @@ public class BirdGirlScript : MonoBehaviour
     private IEnumerator InvincibilityFrames()
     {
         isInvincible = true;
-        yield return new WaitForSeconds(invincibilityDuration); // Wait for 2 seconds (or specified duration)
+        yield return new WaitForSeconds(invincibilityDuration);
         isInvincible = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        animator.SetTrigger("BirdGirlDamage");
-        TakeDamage();
-        logic.TimeStop(hitStun);
+        // Verifica se o objeto colidido tem a tag "Enemy"
+        if (collision.CompareTag("Obstacle") && logic.hp > 0)
+        {
+            animator.SetTrigger("BirdGirlDamage");
+            TakeDamage();
+            logic.TimeStop(hitStun);
+        }
     }
 
-    private void Awake()
-    {
-        myRigidBody = GetComponent<Rigidbody2D>();
-
-        if (OnLandEvent == null)
-            OnLandEvent = new UnityEvent();
-    }
 
     private void FixedUpdate()
     {
+        if (stopGroundCheck)
+        {
+            return;
+        }
+
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -109,12 +132,19 @@ public class BirdGirlScript : MonoBehaviour
                 if (!wasGrounded)
                 {
                     OnLandEvent.Invoke();
-                    if (logic.energy <= 0)
-                    {
-                        logic.setEnergyValue(1);
-                    }
                 }
+
+                logic.setEnergyValue(1);
             }
         }
+
+        animator.SetBool("IsGrounded", m_Grounded);
+    }
+
+    private IEnumerator StopGroundCheckForTime(float delay)
+    {
+        stopGroundCheck = true;
+        yield return new WaitForSeconds(delay);
+        stopGroundCheck = false;
     }
 }

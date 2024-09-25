@@ -23,47 +23,57 @@ public class BirdGirlCombatScript : MonoBehaviour
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextAttackTime)
+        if (logic.hp > 0)
         {
-            Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Verifica se há toques na tela
+            if (Input.touchCount > 0)
+            {
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    Touch touch = Input.GetTouch(i);
+                    Vector3 touchPosition = touch.position;
 
-            // Keyboard input check
-            if (Input.GetKeyDown(KeyCode.X) && !logic.waiting)
+                    // Apenas registra a ação quando o toque começa (fase de "Began")
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        // Verifica se o toque está no lado direito da tela para atacar
+                        if (touchPosition.x > Screen.width / 2 && Time.time >= nextAttackTime && !logic.waiting)
+                        {
+                            Attack();
+                            nextAttackTime = Time.time + 1f / attackRate;
+                        }
+                    }
+                }
+            }
+
+            // Verificação para o input do teclado (X para atacar)
+            if (Input.GetKeyDown(KeyCode.X) && Time.time >= nextAttackTime && !logic.waiting)
             {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
-
-            // Mouse input check
-            if (Input.GetMouseButtonDown(0) && touchPos.x > 0 && !logic.waiting)
-            {
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
-        }
+        }            
     }
 
     void Attack()
     {
-        // Play an attack animation
+        // Toca a animação de ataque
         animator.SetTrigger("BirdGirlAttack");
 
-        // Define an offset for the attackBox position
+        // Define um offset para a posição do attackBox
         Vector2 offset = new Vector2(attackDistance, attackHeight);
 
-        // Adjust the attackBox position with the offset
+        // Ajusta a posição do attackBox com o offset
         Vector2 adjustedAttackPosition = (Vector2)attackBox.position + offset;
 
-        // Detect enemies in range of the adjusted attack position
+        // Detecta inimigos no alcance da posição ajustada
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(adjustedAttackPosition, attackRange, enemyLayers);
 
-        // Damage the enemies
+        // Causa dano aos inimigos
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("TESTE");
             enemy.GetComponent<EnemyT1Script>().TakeDamage(attackDamage);
             logic.TimeStop(attackHitStun);
         }
@@ -74,12 +84,9 @@ public class BirdGirlCombatScript : MonoBehaviour
         if (attackBox == null)
             return;
 
-        Gizmos.color = new Color(1, 0, 0, 0.5f); // Red color with 50% transparency
+        Gizmos.color = new Color(1, 0, 0, 0.5f); // Cor vermelha com 50% de transparência
 
-        // Use the same offset as in the Attack method to ensure the Gizmo reflects the actual collider position
         Vector3 offset = new Vector3(attackDistance, attackHeight, 0f);
-
-        // Calculate the adjusted position for the Gizmo
         Vector3 adjustedPosition = attackBox.position + offset;
 
         Gizmos.DrawWireSphere(adjustedPosition, attackRange);
