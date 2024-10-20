@@ -161,6 +161,9 @@ MonoBehaviour:
   GameOverScreen: {fileID: 1263712913}
   clearStage: {fileID: 1925778186}
   waiting: 0
+  obstacleSpawner1: {fileID: 775100820}
+  obstacleSpawner2: {fileID: 2068893116}
+  obstacleSpawner3: {fileID: 524329442}
 --- !u!4 &6070299
 Transform:
   m_ObjectHideFlags: 0
@@ -417,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &241416063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,6 +1021,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &524329442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524329444}
+  - component: {fileID: 524329443}
+  m_Layer: 0
+  m_Name: Stage 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &524329443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524329442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b2950c70e13774d8d94b5572ebfa3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  bottomObstacle: {fileID: 1503093694009651197, guid: 600e15de67b86f14388fbdae9dfcdb05, type: 3}
+  topObstacle: {fileID: 1503093694009651197, guid: 2e85f3116d1bdef4183ae54b8a7c2418, type: 3}
+  spike: {fileID: 1503093694009651197, guid: a7c5120691df88748b0de90d5c0e2aec, type: 3}
+  enemyT1: {fileID: 1697886669055393674, guid: edd919ce13975824a9880955a2580539, type: 3}
+  enemyT2: {fileID: 1697886669055393674, guid: 3eb2848cbc65fc54e8686ce8e2411fd9, type: 3}
+  clearScreen: {fileID: 8682609038995436993, guid: 026ac3f654e9bf247810469bc6c89f2d, type: 3}
+  obstacleData:
+  - spawnTime: 0
+    obstacleType: 0
+    obstacleHeight: 0
+--- !u!4 &524329444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524329442}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35, y: -10.3, z: 2.4946406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &561998536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1264,181 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1602632948}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &775100820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 775100822}
+  - component: {fileID: 775100821}
+  m_Layer: 0
+  m_Name: Stage 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &775100821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775100820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b2950c70e13774d8d94b5572ebfa3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  bottomObstacle: {fileID: 1503093694009651197, guid: 600e15de67b86f14388fbdae9dfcdb05, type: 3}
+  topObstacle: {fileID: 1503093694009651197, guid: 2e85f3116d1bdef4183ae54b8a7c2418, type: 3}
+  spike: {fileID: 1503093694009651197, guid: a7c5120691df88748b0de90d5c0e2aec, type: 3}
+  enemyT1: {fileID: 1697886669055393674, guid: edd919ce13975824a9880955a2580539, type: 3}
+  enemyT2: {fileID: 1697886669055393674, guid: 3eb2848cbc65fc54e8686ce8e2411fd9, type: 3}
+  clearScreen: {fileID: 8682609038995436993, guid: 026ac3f654e9bf247810469bc6c89f2d, type: 3}
+  obstacleData:
+  - spawnTime: 1
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 4
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 6
+    obstacleType: 1
+    obstacleHeight: 2
+  - spawnTime: 8
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 9
+    obstacleType: 1
+    obstacleHeight: 2
+  - spawnTime: 10
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 10.5
+    obstacleType: 1
+    obstacleHeight: 2
+  - spawnTime: 12
+    obstacleType: 1
+    obstacleHeight: 2
+  - spawnTime: 12.5
+    obstacleType: 1
+    obstacleHeight: 7
+  - spawnTime: 13.3
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 14.5
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 16
+    obstacleType: 1
+    obstacleHeight: 2
+  - spawnTime: 16.5
+    obstacleType: 1
+    obstacleHeight: 7
+  - spawnTime: 17
+    obstacleType: 1
+    obstacleHeight: 12
+  - spawnTime: 18.5
+    obstacleType: 1
+    obstacleHeight: 2
+  - spawnTime: 19
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 22
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 22.3
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 24.5
+    obstacleType: 1
+    obstacleHeight: 2
+  - spawnTime: 25
+    obstacleType: 1
+    obstacleHeight: 6
+  - spawnTime: 25.5
+    obstacleType: 1
+    obstacleHeight: 10
+  - spawnTime: 27
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 28
+    obstacleType: 1
+    obstacleHeight: 4
+  - spawnTime: 29
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 30
+    obstacleType: 1
+    obstacleHeight: 4
+  - spawnTime: 31
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 32
+    obstacleType: 1
+    obstacleHeight: 4
+  - spawnTime: 33
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 33.3
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 33.6
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 35
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 36
+    obstacleType: 1
+    obstacleHeight: 4
+  - spawnTime: 36.5
+    obstacleType: 1
+    obstacleHeight: 4
+  - spawnTime: 37
+    obstacleType: 1
+    obstacleHeight: 4
+  - spawnTime: 38
+    obstacleType: 1
+    obstacleHeight: 4
+  - spawnTime: 38.5
+    obstacleType: 1
+    obstacleHeight: 7
+  - spawnTime: 39
+    obstacleType: 1
+    obstacleHeight: 10
+  - spawnTime: 39.5
+    obstacleType: 1
+    obstacleHeight: 10
+  - spawnTime: 40.5
+    obstacleType: 1
+    obstacleHeight: 7
+  - spawnTime: 42
+    obstacleType: 1
+    obstacleHeight: -5
+  - spawnTime: 43
+    obstacleType: 10
+    obstacleHeight: 0
+--- !u!4 &775100822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775100820}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35, y: -10.3, z: 2.4946406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &778387126
 GameObject:
@@ -3696,6 +3929,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013519176}
   m_CullTransparentMesh: 1
+--- !u!1 &2068893116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2068893118}
+  - component: {fileID: 2068893117}
+  m_Layer: 0
+  m_Name: Stage 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2068893117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068893116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83b2950c70e13774d8d94b5572ebfa3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
+  bottomObstacle: {fileID: 1503093694009651197, guid: 600e15de67b86f14388fbdae9dfcdb05, type: 3}
+  topObstacle: {fileID: 1503093694009651197, guid: 2e85f3116d1bdef4183ae54b8a7c2418, type: 3}
+  spike: {fileID: 1503093694009651197, guid: a7c5120691df88748b0de90d5c0e2aec, type: 3}
+  enemyT1: {fileID: 1697886669055393674, guid: edd919ce13975824a9880955a2580539, type: 3}
+  enemyT2: {fileID: 1697886669055393674, guid: 3eb2848cbc65fc54e8686ce8e2411fd9, type: 3}
+  clearScreen: {fileID: 8682609038995436993, guid: 026ac3f654e9bf247810469bc6c89f2d, type: 3}
+  obstacleData:
+  - spawnTime: 1
+    obstacleType: 1
+    obstacleHeight: 0
+--- !u!4 &2068893118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068893116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35, y: -10.3, z: 2.4946406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3710,6 +3998,9 @@ SceneRoots:
   - {fileID: 1877602614}
   - {fileID: 843662248}
   - {fileID: 241416064}
+  - {fileID: 775100822}
+  - {fileID: 2068893118}
+  - {fileID: 524329444}
   - {fileID: 393603094}
   - {fileID: 1457055471}
   - {fileID: 1876339454}

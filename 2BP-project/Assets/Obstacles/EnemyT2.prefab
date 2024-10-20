@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3120919868669604762}
   - component: {fileID: 5139315320733971905}
-  - component: {fileID: 5182390700694632934}
+  - component: {fileID: 5480582710864628187}
   - component: {fileID: 5877601424550782100}
   - component: {fileID: 8483171957872165025}
   m_Layer: 7
-  m_Name: EnemyT2 1
-  m_TagString: Untagged
+  m_Name: EnemyT2
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.22, y: 1.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 733479792186406474}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 42309ea0ef02d4344abcc3acae054a9f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b0129132a9f2df40abdd6e78ce52df5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5182390700694632934
+--- !u!114 &5480582710864628187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1697886669055393674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f286c9fcce1b624aaf2637763a1c682, type: 3}
+  m_Script: {fileID: 11500000, guid: 57854c8fd9fbe77498ab78f6cfb23676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8483171957872165025}
@@ -106,6 +106,10 @@ MonoBehaviour:
   logic: {fileID: 0}
   maxHealth: 1
   deathAnimationFrames: 0.15
+  waveAmplitude: 7
+  waveFrequency: 3
+  minHeight: -20
+  maxHeight: 20
 --- !u!58 &5877601424550782100
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -174,7 +178,7 @@ GameObject:
   - component: {fileID: 2825708475494765510}
   m_Layer: 7
   m_Name: EnemyT1 Hitbox
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -54,11 +54,13 @@ public class BirdGirlCombatScript : MonoBehaviour
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
-        }            
+        }
     }
 
     void Attack()
     {
+        Debug.Log("Attack triggered");
+
         // Toca a animação de ataque
         animator.SetTrigger("BirdGirlAttack");
 
@@ -71,10 +73,28 @@ public class BirdGirlCombatScript : MonoBehaviour
         // Detecta inimigos no alcance da posição ajustada
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(adjustedAttackPosition, attackRange, enemyLayers);
 
+        Debug.Log("Hit Enemies Count: " + hitEnemies.Length);
+
         // Causa dano aos inimigos
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyT1Script>().TakeDamage(attackDamage);
+            Debug.Log("Enemy hit: " + enemy.name);
+
+            var enemyScriptT1 = enemy.GetComponent<EnemyT1Script>();
+            var enemyScriptT2 = enemy.GetComponent<EnemyT2Script>();
+
+            if (enemyScriptT1 != null)
+            {
+                Debug.Log("EnemyT1Script found, applying damage");
+                enemyScriptT1.TakeDamage(attackDamage);
+            }
+            else if (enemyScriptT2 != null)
+            {
+                Debug.Log("EnemyT2Script found, applying damage");
+                enemyScriptT2.TakeDamage(attackDamage);
+            }
+
+            // Apply hit stun
             logic.TimeStop(attackHitStun);
         }
     }

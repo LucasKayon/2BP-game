@@ -138,7 +138,7 @@ public class BirdGirlScript : MonoBehaviour
             }
         }
 
-        animator.SetBool("IsGrounded", m_Grounded);
+        //animator.SetBool("IsGrounded", m_Grounded);
     }
 
     private IEnumerator StopGroundCheckForTime(float delay)

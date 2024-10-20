@@ -16,19 +16,44 @@ public class LogicScript : MonoBehaviour
     public ClearStageScript clearStage;
     public bool waiting;
 
+    // References to the obstacle spawners
+    public GameObject obstacleSpawner1;
+    public GameObject obstacleSpawner2;
+    public GameObject obstacleSpawner3;
+
     void Start()
     {
         hp = 3;
         energy = 1;
         score = 0;
-    }
-    
 
-   [ContextMenu("Decrease HP")]
-   public void detractHp(int scoreToDetract)
+        // Deactivate all spawners first
+        obstacleSpawner1.SetActive(false);
+        obstacleSpawner2.SetActive(false);
+        obstacleSpawner3.SetActive(false);
+
+        // Activate the correct spawner based on the selected stage (spawnerIndex)
+        switch (StageSelectScript.spawnerIndex)
+        {
+            case 1:
+                obstacleSpawner1.SetActive(true);
+                break;
+            case 2:
+                obstacleSpawner2.SetActive(true);
+                break;
+            case 3:
+                obstacleSpawner3.SetActive(true);
+                break;
+            default:
+                Debug.LogWarning("Invalid spawner index");
+                break;
+        }
+    }
+
+    [ContextMenu("Decrease HP")]
+    public void detractHp(int scoreToDetract)
     {
         hp = hp - scoreToDetract;
-        //Debug.Log($"HP decreased, current HP: {hp}");
         hpIndicator.text = $"HP: {hp}";
     }
 
@@ -36,7 +61,6 @@ public class LogicScript : MonoBehaviour
     public void increaseEnergy(int energyToIncrease)
     {
         energy = energy + energyToIncrease;
-        //Debug.Log($"ENERGY increased, current ENERGY: {energy}");
         energyIndicator.text = $"ENERGY: {energy}";
     }
 
@@ -44,7 +68,6 @@ public class LogicScript : MonoBehaviour
     public void decreaseEnergy(int energyToDecrease)
     {
         energy = energy - energyToDecrease;
-        //Debug.Log($"ENERGY increased, current ENERGY: {energy}");
         energyIndicator.text = $"ENERGY: {energy}";
     }
 
@@ -52,15 +75,13 @@ public class LogicScript : MonoBehaviour
     public void setEnergyValue(int energyValue)
     {
         energy = energyValue;
-        Debug.Log($"ENERGY RESET, current ENERGY: {energy}");
         energyIndicator.text = $"ENERGY: {energy}";
     }
 
     [ContextMenu("Increase Score")]
     public void increaseScore(float scoreIncrease, float multiplier)
     {
-        score = score + (scoreIncrease*multiplier);
-        //Debug.Log($"ENERGY increased, current ENERGY: {energy}");
+        score = score + (scoreIncrease * multiplier);
         scoreIndicator.text = $"SCORE: {score}";
     }
 
@@ -73,17 +94,16 @@ public class LogicScript : MonoBehaviour
     public void stageClear()
     {
         if (hp >= 1)
-        { 
+        {
             clearStage.Setup(score);
         }
-            
     }
 
     public void TimeStop(float duration)
     {
-        if(waiting)
-        { 
-            return; 
+        if (waiting)
+        {
+            return;
         }
 
         Time.timeScale = 0.0f;
@@ -102,7 +122,6 @@ public class LogicScript : MonoBehaviour
     {
         if (hp <= 0)
         {
-            //SceneManager.LoadScene("Menu");
             setScore(0);
             GameOverScreen.Setup();
         }
